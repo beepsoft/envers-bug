@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demonstrates a bug when having a @ManyToMany relationship with @OrderBy of a ID property of the target entity and
+ * Demonstrates a bug when having a @ManyToMany relationship with @OrderBy with an ID property of the target entity and
  * trying to load an old revision of the entity.
  *
  * Results in:
@@ -78,6 +78,7 @@ class EnversBugTest
 					.add(AuditEntity.property("mtid").eq(pub1.mtid));
 			List<Object[]> queryResult = q.getResultList();
 			Publication oldObj = (Publication)queryResult.get(0)[0];
+			// Breaks here
 			oldObj.languages.size();
 			return oldObj;
 		});
