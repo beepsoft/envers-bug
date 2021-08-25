@@ -16,7 +16,10 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<!-- With version 5.5.3.Final the problem still persists -->
-		<!-- <hibernate.version>5.5.3.Final</hibernate.version> -->
+		<!--		5.3.22.Final: it works-->
+<!--				<hibernate.version>5.3.22.Final</hibernate.version>-->
+		<!--		5.4.0.Final: fails -->
+		<hibernate.version>5.4.0.Final</hibernate.version>
 	</properties>
 	<dependencies>
 		<dependency>
