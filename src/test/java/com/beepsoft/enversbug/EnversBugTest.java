@@ -5,6 +5,7 @@ import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,8 +58,18 @@ class EnversBugTest
 			Language l = new Language();
 			l.languageCode = "hu";
 			p.languages.add(l);
-
 			entityManager.persist(l);
+
+			l = new Language();
+			l.languageCode = "en";
+			p.languages.add(l);
+			entityManager.persist(l);
+
+			l = new Language();
+			l.languageCode = "fr";
+			p.languages.add(l);
+			entityManager.persist(l);
+
 			entityManager.persist(p);
 
 			return p;
@@ -80,6 +91,9 @@ class EnversBugTest
 			Publication oldObj = (Publication)queryResult.get(0)[0];
 			// Breaks here
 			oldObj.languages.size();
+			assertEquals(oldObj.languages.get(0).languageCode, "hu");
+			assertEquals(oldObj.languages.get(1).languageCode, "en");
+			assertEquals(oldObj.languages.get(2).languageCode, "fr");
 			return oldObj;
 		});
 
